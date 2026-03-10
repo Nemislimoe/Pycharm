@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Усі книги — BookCatalog{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1>Каталог <em>книг</em></h1>
+    <p style="color:var(--muted); font-size:.9rem; margin-top:6px;">
+      Усього книг: <strong style="color:var(--text);">{{ books|length }}</strong>
+    </p>
+  </div>
+  <a class="btn btn-primary" href="/books/add">+ Додати книгу</a>
+</div>
+
+{% if books %}
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Назва</th>
+          <th>Автор</th>
+          <th>Рік</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for book in books %}
+        <tr>
+          <td class="td-id">{{ book.id }}</td>
+          <td><strong>{{ book.title }}</strong></td>
+          <td>{{ book.author or '—' }}</td>
+          <td class="td-year">{{ book.year or '—' }}</td>
+          <td>
+            <div class="td-actions">
+              <a class="btn btn-outline btn-sm" href="/books/{{ book.id }}/edit">Редагувати</a>
+              <form method="POST" action="/books/{{ book.id }}/delete"
+                    onsubmit="return confirm('Видалити «{{ book.title }}»?')">
+                <button type="submit" class="btn btn-danger">Видалити</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+{% else %}
+  <div class="table-wrap">
+    <div class="empty">
+      <div class="empty-icon">📭</div>
+      <p>Каталог поки що порожній.<br>Додайте свою першу книгу!</p>
+      <a class="btn btn-primary" href="/books/add">+ Додати книгу</a>
+    </div>
+  </div>
+{% endif %}
+{% endblock %}

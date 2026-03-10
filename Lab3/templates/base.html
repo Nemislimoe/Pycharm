@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{% block title %}Book Catalog{% endblock %}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0f0e0c;
+      --surface:  #1a1814;
+      --card:     #1f1d19;
+      --border:   #2e2b25;
+      --accent:   #c9a84c;
+      --accent2:  #e8c96e;
+      --text:     #e8e2d5;
+      --muted:    #7a7265;
+      --danger:   #c0392b;
+      --green:    #27ae60;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Lato', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: .02em;
+    }
+    .logo span { color: var(--text); font-weight: 400; }
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .85rem;
+      font-weight: 400;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 4px;
+      border: 1px solid transparent;
+      transition: all .2s;
+    }
+    nav a:hover, nav a.active {
+      color: var(--accent);
+      border-color: var(--accent);
+      background: rgba(201,168,76,.08);
+    }
+
+    /* ── FLASH MESSAGES ── */
+    .flash {
+      max-width: 900px; margin: 20px auto 0; padding: 0 24px;
+    }
+    .flash-msg {
+      padding: 12px 20px; border-radius: 6px;
+      font-size: .9rem; margin-bottom: 8px;
+    }
+    .flash-success {
+      background: rgba(39,174,96,.1);
+      border: 1px solid rgba(39,174,96,.3);
+      color: #4ade80;
+    }
+    .flash-error {
+      background: rgba(192,57,43,.1);
+      border: 1px solid rgba(192,57,43,.3);
+      color: #f87171;
+    }
+
+    /* ── MAIN ── */
+    main {
+      max-width: 900px;
+      margin: 40px auto 80px;
+      padding: 0 24px;
+    }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 32px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.1;
+    }
+    h1 em { color: var(--accent); font-style: normal; }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-block;
+      font-family: 'Lato', sans-serif;
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 10px 22px;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #0f0e0c;
+    }
+    .btn-primary:hover { background: var(--accent2); transform: translateY(-1px); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+    }
+    .btn-outline:hover { background: rgba(201,168,76,.1); }
+
+    .btn-danger {
+      background: transparent;
+      color: #f87171;
+      border: 1px solid rgba(192,57,43,.4);
+      font-size: .72rem;
+      padding: 7px 14px;
+    }
+    .btn-danger:hover { background: rgba(192,57,43,.1); }
+
+    .btn-sm { padding: 7px 14px; font-size: .72rem; }
+
+    /* ── TABLE ── */
+    .table-wrap {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    table { width: 100%; border-collapse: collapse; }
+    thead tr { background: rgba(201,168,76,.06); }
+    th {
+      font-size: .68rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      padding: 14px 20px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    td {
+      padding: 14px 20px;
+      font-size: .92rem;
+      border-bottom: 1px solid rgba(46,43,37,.6);
+      vertical-align: middle;
+    }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:hover td { background: rgba(201,168,76,.03); }
+    .td-id { color: var(--muted); font-size: .8rem; width: 50px; }
+    .td-year { color: var(--muted); }
+    .td-actions { text-align: right; white-space: nowrap; display: flex; gap: 8px; justify-content: flex-end; }
+
+    /* ── EMPTY STATE ── */
+    .empty {
+      text-align: center; padding: 60px 20px; color: var(--muted);
+    }
+    .empty-icon { font-size: 3rem; margin-bottom: 16px; }
+    .empty p { font-size: .95rem; margin-bottom: 24px; }
+
+    /* ── FORM CARD ── */
+    .form-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 36px 40px;
+      max-width: 560px;
+    }
+    .form-group { margin-bottom: 22px; }
+    label {
+      display: block;
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    input[type=text], input[type=number] {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      color: var(--text);
+      font-family: 'Lato', sans-serif;
+      font-size: 1rem;
+      padding: 11px 15px;
+      outline: none;
+      transition: border-color .2s;
+    }
+    input:focus { border-color: var(--accent); }
+    .required-mark { color: var(--accent); margin-left: 3px; }
+    .field-note { font-size: .75rem; color: var(--muted); margin-top: 5px; }
+
+    .form-actions {
+      display: flex; gap: 12px; align-items: center; margin-top: 28px;
+    }
+    a.back-link {
+      color: var(--muted); font-size: .85rem; text-decoration: none;
+      transition: color .2s;
+    }
+    a.back-link:hover { color: var(--accent); }
+
+    /* ── DELETE CONFIRM ── */
+    .confirm-card {
+      background: var(--card);
+      border: 1px solid rgba(192,57,43,.3);
+      border-radius: 10px;
+      padding: 36px 40px;
+      max-width: 500px;
+    }
+    .confirm-card h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      margin-bottom: 12px;
+      color: #f87171;
+    }
+    .confirm-card p { color: var(--muted); margin-bottom: 28px; line-height: 1.6; }
+    .book-info {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 14px 18px;
+      margin-bottom: 24px;
+    }
+    .book-info strong { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="logo" href="/books">📚 Book<span>Catalog</span></a>
+    <nav>
+      <a href="/books">All Books</a>
+      <a href="/books/add">+ Add Book</a>
+    </nav>
+  </header>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="flash">
+        {% for category, message in messages %}
+          <div class="flash-msg flash-{{ category }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

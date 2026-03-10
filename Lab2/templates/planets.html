@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Solar System Planets{% endblock %}
+{% block content %}
+  <h1>Solar <span>System</span></h1>
+  <p class="subtitle">Planets of our solar system and their moons</p>
+
+  {% for planet in planets %}
+    <div class="card">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+        <div>
+          <strong style="font-size:1.1rem;">{{ planet.name }}</strong>
+          <span class="badge-moons">🌙 {{ planet.moons }} moons</span>
+          {% if planet.moons > 10 %}
+            <span class="badge-moons" style="background:rgba(74,222,128,.1);color:#4ade80;border-color:rgba(74,222,128,.3);">
+              ✨ This planet has many moons!
+            </span>
+          {% endif %}
+        </div>
+      </div>
+      <p style="color:var(--muted); font-size:.9rem; margin-top:8px;">{{ planet.description }}</p>
+    </div>
+  {% endfor %}
+{% endblock %}

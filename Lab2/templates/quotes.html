@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Philosophical Quotes{% endblock %}
+{% block content %}
+  <h1>Philo<span>sophy</span></h1>
+  <p class="subtitle">Wisdom from the greatest thinkers of antiquity</p>
+
+  {% for author, quote in quotes.items() %}
+    <div class="card">
+      <div class="quote-author">— {{ author }}</div>
+      <div class="quote-text {% if author == 'Сократ' %}socrates{% endif %}">
+        "{{ quote }}"
+      </div>
+      {% if author == 'Сократ' %}
+        <div style="font-size:.72rem; color:var(--gold); margin-top:8px; opacity:.7;">
+          ★ Featured philosopher
+        </div>
+      {% endif %}
+    </div>
+  {% endfor %}
+{% endblock %}

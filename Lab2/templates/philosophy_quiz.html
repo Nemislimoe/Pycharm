@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Philosophy Quiz{% endblock %}
+{% block content %}
+  <h1>Philo<span>sophy</span> Quiz</h1>
+  <p class="subtitle">Choose a school of thought and explore its ideas</p>
+
+  {% if result %}
+    {% if error %}
+      <div class="error-box">⚠️ {{ result }}</div>
+    {% else %}
+      <div class="result-box">🏛 {{ result }}</div>
+    {% endif %}
+    <a class="back" href="/philosophy_quiz">← Choose again</a>
+  {% else %}
+    <div class="card" style="padding:32px;">
+      <form method="POST">
+        <div class="form-group">
+          <label for="school">Select a philosophical school</label>
+          <select id="school" name="school">
+            <option value="">— Select a school —</option>
+            <option value="Стоїцизм">Стоїцизм</option>
+            <option value="Епікурейство">Епікурейство</option>
+            <option value="Скептицизм">Скептицизм</option>
+          </select>
+        </div>
+        <button type="submit">EXPLORE →</button>
+      </form>
+    </div>
+  {% endif %}
+{% endblock %}

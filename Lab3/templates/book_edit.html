@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Редагувати «{{ book.title }}» — BookCatalog{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1>Редагувати <em>книгу</em></h1>
+</div>
+
+<div class="form-card">
+  <form method="POST" action="/books/{{ book.id }}/update">
+
+    <div class="form-group">
+      <label for="title">Назва <span class="required-mark">*</span></label>
+      <input type="text" id="title" name="title"
+             value="{{ book.title }}" required>
+      {% if errors and errors.title %}
+        <p class="field-note" style="color:#f87171;">{{ errors.title }}</p>
+      {% endif %}
+    </div>
+
+    <div class="form-group">
+      <label for="author">Автор</label>
+      <input type="text" id="author" name="author"
+             value="{{ book.author or '' }}">
+    </div>
+
+    <div class="form-group">
+      <label for="year">Рік видання</label>
+      <input type="number" id="year" name="year"
+             min="1" max="2100"
+             value="{{ book.year or '' }}">
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Зберегти зміни</button>
+      <a class="back-link" href="/books">← Скасувати</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

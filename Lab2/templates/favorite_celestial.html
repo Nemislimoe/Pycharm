@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Favorite Celestial Body{% endblock %}
+{% block content %}
+  <h1>Your <span>Cosmos</span></h1>
+  <p class="subtitle">Tell us your favorite object in the universe</p>
+
+  {% if result %}
+    {% if error %}
+      <div class="error-box">⚠️ {{ result }}</div>
+    {% else %}
+      <div class="result-box">🌌 {{ result }}</div>
+    {% endif %}
+    <a class="back" href="/favorite_celestial">← Try again</a>
+  {% else %}
+    <div class="card" style="padding:32px;">
+      <form method="POST">
+        <div class="form-group">
+          <label for="name">Celestial body name</label>
+          <input type="text" id="name" name="name"
+                 placeholder="e.g. Mars, Sirius, Halley's Comet…">
+        </div>
+        <button type="submit">SUBMIT →</button>
+      </form>
+    </div>
+  {% endif %}
+{% endblock %}

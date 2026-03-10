@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Astronomy Discoveries{% endblock %}
+{% block content %}
+  <h1>Great <span>Discoveries</span></h1>
+  <p class="subtitle">Milestones in the history of astronomy</p>
+
+  <div class="card" style="padding:0; overflow:hidden;">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Discovery</th>
+          <th>Year</th>
+          <th>Era</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in discoveries %}
+          <tr {% if item.year > 1800 %}class="modern"{% endif %}>
+            <td style="color:var(--muted); font-size:.85rem;">{{ loop.index }}</td>
+            <td>{{ item.name }}</td>
+            <td style="font-family:'Orbitron',monospace; font-size:.85rem;">{{ item.year }}</td>
+            <td>
+              {% if item.year > 1800 %}
+                <span class="badge" style="background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.3);border-radius:20px;padding:2px 10px;font-size:.72rem;color:var(--accent);">
+                  Modern discovery
+                </span>
+              {% else %}
+                <span style="color:var(--muted); font-size:.8rem;">Classical</span>
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
