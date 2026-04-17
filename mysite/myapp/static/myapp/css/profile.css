@@ -1,0 +1,41 @@
+/* myapp/static/myapp/css/profile.css */
+/* Завдання 4: локальний CSS для сторінки профілю */
+
+.profile-card {
+  background: #fff;
+  border: 1px solid #e4e4de;
+  border-radius: 10px;
+  padding: 2rem;
+  max-width: 480px;
+}
+
+.profile-card h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1a1a18;
+  margin-bottom: .5rem;
+  border-bottom: 2px solid #2563eb;
+  padding-bottom: .4rem;
+  display: inline-block;
+}
+
+.profile-card p {
+  color: #6b6b66;
+  margin-bottom: 1.25rem;
+}
+
+/* Кнопка з ефектом кліку */
+.btn-profile {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: .65rem 1.4rem;
+  font-size: .95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .15s, transform .1s;
+}
+
+.btn-profile:hover  { background: #1d4ed8; }
+.btn-profile:active { transform: scale(.97); }

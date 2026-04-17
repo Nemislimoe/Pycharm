@@ -1,0 +1,79 @@
+/* static/css/global.css */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --clr-bg: #f7f7f5;
+  --clr-surface: #ffffff;
+  --clr-text: #1a1a18;
+  --clr-muted: #6b6b66;
+  --clr-accent: #2563eb;
+  --clr-border: #e4e4de;
+  --radius: 10px;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: var(--clr-bg);
+  color: var(--clr-text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* ── Header ── */
+header {
+  background: var(--clr-text);
+  color: #fff;
+  padding: 0 2rem;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+header .brand {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: -0.02em;
+}
+
+header nav { display: flex; gap: 1.5rem; margin-left: auto; }
+
+header nav a {
+  color: #aaa;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color .15s;
+}
+
+header nav a:hover { color: #fff; }
+
+/* ── Main content ── */
+main {
+  flex: 1;
+  max-width: 860px;
+  width: 100%;
+  margin: 2.5rem auto;
+  padding: 0 1.5rem;
+}
+
+/* ── Footer ── */
+footer {
+  background: var(--clr-surface);
+  border-top: 1px solid var(--clr-border);
+  text-align: center;
+  padding: 1.25rem;
+  font-size: 0.85rem;
+  color: var(--clr-muted);
+}
+
+/* ── Утиліти ── */
+h1 { font-size: 2rem; font-weight: 700; letter-spacing: -0.03em; margin-bottom: .6rem; }
+h2 { font-size: 1.4rem; font-weight: 600; margin-bottom: .5rem; }
+p  { color: var(--clr-muted); margin-bottom: 1rem; }
+
+a { color: var(--clr-accent); }

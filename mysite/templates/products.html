@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Каталог товарів{% endblock %}
+
+{% block extra_head %}
+  <link rel="stylesheet" href="{% static 'css/products.css' %}">
+{% endblock %}
+
+{% block content %}
+  <h1>Каталог товарів</h1>
+  <p>Знайдіть товар, який вас цікавить.</p>
+
+  <div class="products-grid">
+    {% for product in products %}
+      {# Завдання 3: включення компонента картки через {% include %} #}
+      {% include 'components/card.html' %}
+    {% empty %}
+      <p>Товарів поки немає.</p>
+    {% endfor %}
+  </div>
+{% endblock %}

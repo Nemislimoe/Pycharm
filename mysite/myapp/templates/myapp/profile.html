@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Профіль{% endblock %}
+
+{# Завдання 4: локальний CSS з папки myapp/static/myapp/ #}
+{% block extra_head %}
+  <link rel="stylesheet" href="{% static 'myapp/css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+  <div class="profile-card">
+    <h1>Мій профіль</h1>
+    <p>Тут відображається інформація про вашого акаунту.</p>
+    <button id="profile-btn" class="btn-profile">Зберегти профіль</button>
+  </div>
+{% endblock %}
+
+{# Завдання 4: локальний JS з папки myapp/static/myapp/ #}
+{% block extra_js %}
+  <script src="{% static 'myapp/js/profile.js' %}"></script>
+{% endblock %}

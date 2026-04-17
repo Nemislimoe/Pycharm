@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Контакти{% endblock %}
+
+{% block content %}
+  <h1>Контакти</h1>
+  <p>Зв'яжіться з нами будь-яким зручним способом.</p>
+{% endblock %}
+
+{# Завдання 5: локальний JS підключається через блок extra_js #}
+{% block extra_js %}
+  <script src="{% static 'js/contact.js' %}"></script>
+{% endblock %}

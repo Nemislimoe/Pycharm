@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Головна сторінка{% endblock %}
+
+{# Локальний CSS лише для цієї сторінки #}
+{% block extra_head %}
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+  <div class="hero">
+    <span class="welcome-badge">Ласкаво просимо</span>
+    <h1>Ласкаво просимо на мій сайт!</h1>
+    <p>
+      Це головна сторінка проєкту. Тут ви знайдете каталог товарів,
+      сторінку профілю та контактну форму.
+    </p>
+  </div>
+{% endblock %}
+
+{# Локальний JS лише для цієї сторінки #}
+{% block extra_js %}
+  <script src="{% static 'js/home.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,12 @@
+{# templates/components/card.html #}
+{# Компонент картки товару. Використовується через {% include %} #}
+{# Очікує змінну product з полями: image_url, name, description, price #}
+
+<div class="card">
+  <img src="{{ product.image_url }}" alt="{{ product.name }}">
+  <div class="card-body">
+    <h2>{{ product.name }}</h2>
+    <p>{{ product.description }}</p>
+    <span class="card-price">{{ product.price }} грн</span>
+  </div>
+</div>

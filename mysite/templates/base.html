@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>{% block title %}Мій сайт{% endblock %}</title>
+
+  {# Глобальний CSS — підключається на кожній сторінці #}
+  <link rel="stylesheet" href="{% static 'css/global.css' %}">
+
+  {# Блок для локального CSS дочірніх шаблонів #}
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+  {# ── Шапка з навігаційним меню ── #}
+  <header>
+    <a href="/" class="brand">🏠 Мій сайт</a>
+    <nav>
+      <a href="/">Головна</a>
+      <a href="/products/">Товари</a>
+      <a href="/profile/">Профіль</a>
+      <a href="/contact/">Контакти</a>
+    </nav>
+  </header>
+
+  {# ── Основний контент — замінюється в дочірніх шаблонах ── #}
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  {# ── Футер ── #}
+  <footer>
+    <p>&copy; 2025 Мій сайт. Усі права захищено.</p>
+  </footer>
+
+  {# Глобальний JS — підключається на кожній сторінці #}
+  <script src="{% static 'js/global.js' %}"></script>
+
+  {# Блок для локального JS дочірніх шаблонів #}
+  {% block extra_js %}{% endblock %}
+
+</body>
+</html>
