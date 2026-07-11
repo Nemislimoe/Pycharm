@@ -1,0 +1,11 @@
+Age,Salary,City,Experience,Education,Purchased
+25,50000,Kyiv,2,Bachelor,0
+32,60000,Lviv,5,Master,1
+47,52000,Kyiv,20,PhD,0
+51,,Odesa,25,Master,1
+62,120000,Lviv,35,PhD,1
+29,58000,Kyiv,,Bachelor,0
+41,76000,Odesa,15,Master,1
+36,69000,Kyiv,10,Bachelor,0
+28,48000,Lviv,3,Bachelor,0
+55,110000,Odesa,30,PhD,1
